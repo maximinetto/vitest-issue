@@ -17,4 +17,13 @@ describe("ExampleComponent", () => {
     await waitFor(() => screen.getByText("Hello, world!")); // esperamos a que el mensaje cambie
     expect(screen.getByText("Hello, world!")).toBeInTheDocument(); // comprobamos que el mensaje sea el correcto
   });
+
+  test("changes message after 1 second --- 2", async () => {
+    render(<ExampleComponent />);
+    act(() => jest.advanceTimersByTime(1000));
+    await waitFor(() =>
+      expect(screen.getByText("Hello, world!")).toBeInTheDocument()
+    );
+    expect(await screen.getByText("Hello, world!")).toBeInTheDocument();
+  });
 });

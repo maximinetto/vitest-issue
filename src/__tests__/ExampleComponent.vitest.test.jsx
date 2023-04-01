@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import ExampleComponent from "../ExampleComponent";
 
@@ -13,8 +14,16 @@ describe("ExampleComponent", () => {
 
   test("changes message after 1 second", async () => {
     render(<ExampleComponent />);
-    act(() => vi.advanceTimersByTime(1000)); // avanzamos los timers para que se ejecute el timeout
-    await waitFor(() => screen.getByText("Hello, world!")); // esperamos a que el mensaje cambie
-    expect(screen.getByText("Hello, world!")).toBeInTheDocument(); // comprobamos que el mensaje sea el correcto
+    act(() => vi.advanceTimersByTime(1000));
+    expect(await screen.findByText("Hello, world!")).toBeInTheDocument();
+  });
+
+  test("changes message after 1 second --- 2", async () => {
+    render(<ExampleComponent />);
+    act(() => vi.advanceTimersByTime(1000));
+    await waitFor(() =>
+      expect(screen.getByText("Hello, world!")).toBeInTheDocument()
+    );
+    expect(await screen.getByText("Hello, world!")).toBeInTheDocument();
   });
 });
