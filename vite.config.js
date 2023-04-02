@@ -8,6 +8,7 @@ export default defineConfig({
     include: "**/*.vitest.test.{js,mjs,cjs,ts,mts,cts,jsx,tsx}",
     globals: true,
     environment: "jsdom",
+    setupFiles: "./config/vitest/setupTests.js",
     // you might want to disable it, if you don't have tests that rely on CSS
     // since parsing CSS is slow
     css: true,
